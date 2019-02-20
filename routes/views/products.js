@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { productsMock } = require('../../utils/mocks/products');
+const ProductsService = require('../../services/products')
 
-router.get('/', function (req, res) {
-  res.render('products', { products: productsMock });
+const productService = new ProductsService();
+
+router.get('/', async function (req, res, next) {
+  const { tags } = req.query;
+  try { 
+    throw new Error('Its not working from view');
+    const products = await productService.getProducts({ tags });
+    res.render('products', { products });
+  } catch (err) {
+    next(err);
+  } 
 })
 
 module.exports = router;

@@ -12,6 +12,7 @@ function productsApi (app) {
     const { tags } = req.query;
 
     try {
+      throw new Error('Its not working from api');
       const products = await productService.getProducts({ tags })
 
       res.status(200).json({
