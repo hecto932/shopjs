@@ -8,6 +8,7 @@ const authApiRouter = require('./routes/api/auth');
 const boom = require('boom');
 const debug = require('debug')('app:server');
 const isRequestAjaxOrApi = require('./utils/isRequestAjaxOrApi');
+const { config } = require('./config');
 
 const {
   logErrors,
@@ -58,6 +59,6 @@ app.use(errorHandler);
 
 
 // server
-const server = app.listen(8000, function () {
+const server = app.listen(config.port, function () {
   debug(`Listening http://localhost:${server.address().port}`);
 });
