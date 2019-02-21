@@ -4,7 +4,7 @@
   "description": "A simple express ap",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "NODE_ENV=production node index",
     "dev": "nodemon index",
     "test": "mocha --exit",
     "test:cover": "nyc npm run test",
@@ -50,6 +50,11 @@
   },
   "nyc": {
     "all": true,
-    "include": ["routes", "services", "lib", "utils"]
+    "include": [
+      "routes",
+      "services",
+      "lib",
+      "utils"
+    ]
   }
 }
