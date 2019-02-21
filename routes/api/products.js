@@ -2,6 +2,15 @@ const debug = require('debug')('app:server');
 const express = require('express');
 const ProductService = require('../../services/products');
 
+const validation = require('../../utils/middlewarre/validationHandler');
+
+const {
+  productIdSchema,
+  productTagSchema,
+  createProductSchema,
+  updateProductSchema
+} = require('../../utils/schemas/products');
+
 const productService = new ProductService();
 
 function productsApi (app) {
@@ -39,7 +48,7 @@ function productsApi (app) {
     }
   });
 
-  router.post('/', async function (req, res, next) {
+  router.post('/', validation(createProductSchema), async function (req, res, next) {
     const { body:product } = req;
     
     try {
@@ -54,7 +63,7 @@ function productsApi (app) {
     }
   });
 
-  router.put('/:productId', async function (req, res, next) {
+  router.put('/:productId', validation({ productId: productIdSchema }, 'params'), validation(updateProductSchema), async function (req, res, next) {
     const { productId } = req.params;
     const { body:product } = req;
     
