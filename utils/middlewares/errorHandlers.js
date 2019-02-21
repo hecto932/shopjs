@@ -1,7 +1,7 @@
 const Sentry = require('@sentry/node');
 const boom = require('boom');
 const { config } = require('../../config');
-const isRequestAjaxOrApi = require('../../utils/isRequestAjaxOrApi');
+const isRequestAjaxOrApi = require('../isRequestAjaxOrApi');
 
 Sentry.init({ dsn: `${config.sentryDns}@sentry.io/${config.sentryId}` });
 

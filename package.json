@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "test": "mocha --exit",
+    "test:cover": "nyc npm run test",
+    "dev:inspect": "nodemon --inspect index",
+    "dev:debug": "DEBUG=express:*,app:* npm run dev",
+    "debug": "DEBUG=express:*,app:* npm start"
   },
   "repository": {
     "type": "git",
@@ -36,6 +41,15 @@
   "devDependencies": {
     "chalk": "^2.4.2",
     "debug": "^4.1.1",
-    "nodemon": "^1.18.10"
+    "mocha": "^6.0.0",
+    "nodemon": "^1.18.10",
+    "nyc": "^13.3.0",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.2.4",
+    "supertest": "^3.4.2"
+  },
+  "nyc": {
+    "all": true,
+    "include": ["routes", "services", "lib", "utils"]
   }
 }
